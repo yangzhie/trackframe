@@ -11,6 +11,8 @@ const {
 	sortPrimaryWeapons,
 	sortSecondaryWeapons,
 	sortMeleeWeapons,
+	sortArchGuns,
+	sortArchMelee,
 } = require("./utils/helper/sortWeapons");
 const { sortResources } = require("./utils/helper/sortResources");
 
@@ -23,9 +25,9 @@ app.get("/test", (req, res) => {
 
 app.get("/warframes", async (req, res) => {
 	const rawWarframes = await fetchWarframes();
-	const warframes = sortWarframes(rawWarframes); // TODO: extract archwing  weapons
+	const warframes = sortWarframes(rawWarframes);
 	const archwings = sortArchwings(rawWarframes);
-	const necramechs = sortNecramechs(rawWarframes); // TODO: add to vehicles
+	const necramechs = sortNecramechs(rawWarframes);
 	res.json(archwings);
 });
 
@@ -36,7 +38,9 @@ app.get("/weapons", async (req, res) => {
 	const secondaryWeapons = sortSecondaryWeapons(rawWeapons);
 	// TODO: add zaws
 	const meleeWeapons = sortMeleeWeapons(rawWeapons);
-	res.json(meleeWeapons);
+	const archGuns = sortArchGuns(rawWeapons);
+	const archMelees = sortArchMelee(rawWeapons);
+	res.json(archMelees);
 });
 
 app.get("/resources", async (req, res) => {

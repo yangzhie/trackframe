@@ -25,8 +25,28 @@ const sortMeleeWeapons = (weapons) => {
 	return sortedMeleeWeapons;
 };
 
+// Extract Arch-Gun data
+const sortArchGuns = (weapons) => {
+	const sortedArchGuns = weapons.filter((weapon) => {
+		return weapon["category"] === "Arch-Gun";
+	});
+
+	return sortedArchGuns;
+};
+
+// Extract Arch-Melee data
+const sortArchMelee = (weapons) => {
+	const sortedArchMelee = weapons.filter((weapon) => {
+		return weapon["category"] === "Arch-Melee";
+	});
+
+	return sortedArchMelee;
+};
+
 module.exports = {
 	sortPrimaryWeapons,
 	sortSecondaryWeapons,
 	sortMeleeWeapons,
+	sortArchGuns,
+	sortArchMelee,
 };
