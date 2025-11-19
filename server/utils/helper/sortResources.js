@@ -1,9 +1,6 @@
 // TODO: KITGUNS
 // TODO: ZAWS
-// TODO: ARCHWINGS + PLEXUS
-// TODO: ARCHGUNS
-// TODO: ARCHMELEES
-// TODO: AMPS
+// TODO: PLEXUS
 const kDrivesArr = [
 	"Bad Baby",
 	"Feverspine",
@@ -12,18 +9,18 @@ const kDrivesArr = [
 	"Runway",
 ];
 
-const sortResources = (resourcesObj) => {
+const sortResources = (resourcesObj, siroccoData) => {
 	// Extract values and get rid of nested arrays
 	const resources = Object.values(resourcesObj).flat();
 
-	// Declare robotic arrays
+	// Declare Robotic arrays
 	const sentinelWeapons = [];
 	const hounds = [];
 	const sentinels = [];
 	const moas = [];
 	const robotics = { sentinelWeapons, hounds, sentinels, moas };
 
-	// Declare companion arrays
+	// Declare Companion arrays
 	const kavats = [];
 	const kubrows = [];
 	const vulpaphylas = [];
@@ -31,9 +28,14 @@ const sortResources = (resourcesObj) => {
 	const predasites = [];
 	const companions = { kavats, kubrows, vulpaphylas, predasites };
 
-	// Declare k-drive and relevant component arrays
+	// Declare K-Drive and relevant Component arrays
 	const kDrives = [];
 	const kDriveComponents = [];
+
+	// Declare Amp arrays
+	const amps = [];
+	const ampBraces = [];
+	const ampScaffolds = [];
 
 	const temp = [];
 
@@ -42,26 +44,26 @@ const sortResources = (resourcesObj) => {
 		const type = resources[i]["resourceType"];
 		const name = resources[i]["resource"];
 
-		// Extract sentinels
+		// Extract Sentinels
 		if (type === "Sentinel") {
 			sentinels.push(resources[i]);
 		}
 
-		// Extract sentinel weapons
+		// Extract Sentinel Weapons
 		if (type === "Companion Weapon") {
 			sentinelWeapons.push(resources[i]);
 		}
 
-		// Extract pets
+		// Extract Pets
 		if (type === "Pets") {
-			// Extract robotics
+			// Extract Robotics
 			if (name.includes("Hound")) {
 				hounds.push(resources[i]);
 			} else if (name.includes("Moa")) {
 				moas.push(resources[i]);
 			}
 
-			// Extract companions
+			// Extract Companions
 			if (name.includes("Kavat")) {
 				kavats.push(resources[i]);
 			} else if (name.includes("Kubrow")) {
@@ -75,17 +77,28 @@ const sortResources = (resourcesObj) => {
 			}
 		}
 
-		// Extract k-drives + components
+		// Extract K-Drives + Components
 		if (type === "K-Drive Component") {
-			if (kDrivesArr.includes(resources[i]["resource"])) {
+			if (kDrivesArr.includes(name)) {
 				kDrives.push(resources[i]);
 			} else {
 				kDriveComponents.push(resources[i]);
 			}
 		}
+
+		// Extract Amps
+		if (type === "Amp") {
+			if (name.includes("Prism")) {
+				amps.push(resources[i]);
+			} else if (name.includes("Brace")) {
+				ampBraces.push(resources[i]);
+			} else if (name.includes("Scaffold")) {
+				ampScaffolds.push(resources[i]);
+			}
+		}
 	}
 
-	return temp;
+	return amps;
 };
 
 module.exports = {
