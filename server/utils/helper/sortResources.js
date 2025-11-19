@@ -8,8 +8,29 @@ const kDrivesArr = [
 	"Needlenose",
 	"Runway",
 ];
+const kitgunsArr = [
+	"Catchmoon",
+	"Gaze",
+	"Rattleguts",
+	"Tombfinger",
+	"Sporelacer",
+	"Vermisplicer",
+];
+const zawArr = [
+	"Balla",
+	"Cyath",
+	"Dehtat",
+	"Dokrahm",
+	"Kronsh",
+	"Mewan",
+	"Ooltha",
+	"Rabvee",
+	"Sepfahn",
+	"Plague Keewar",
+	"Plague Kripath",
+];
 
-const sortResources = (resourcesObj, siroccoData) => {
+const sortResources = (resourcesObj) => {
 	// Extract values and get rid of nested arrays
 	const resources = Object.values(resourcesObj).flat();
 
@@ -36,6 +57,18 @@ const sortResources = (resourcesObj, siroccoData) => {
 	const amps = [];
 	const ampBraces = [];
 	const ampScaffolds = [];
+
+	// Declare IG-variants array
+	const incarnonGenesis = [];
+
+	// Declare Kitgun and Zaw arrays + objects
+	const kitguns = [];
+	const kitgunComponents = [];
+	const kitgunsObj = { kitguns, kitgunComponents };
+
+	const zaws = [];
+	const zawComponents = [];
+	const zawsObj = { zaws, zawComponents };
 
 	const temp = [];
 
@@ -96,9 +129,32 @@ const sortResources = (resourcesObj, siroccoData) => {
 				ampScaffolds.push(resources[i]);
 			}
 		}
+
+		// Extract Incarnon Genesis Weapons
+		if (type === "Equipment Adapter") {
+			incarnonGenesis.push(resources[i]);
+		}
+
+		// Extract Kitguns + their components
+		if (type === "Kitgun Component") {
+			if (kitgunsArr.includes(name)) {
+				kitguns.push(resources[i]);
+			} else {
+				kitgunComponents.push(resources[i]);
+			}
+		}
+
+		// Extract Zaws + their components
+		if (type === "Zaw Component") {
+			if (zawArr.includes(name)) {
+				zaws.push(resources[i]);
+			} else {
+				zawArr.push(resources[i]);
+			}
+		}
 	}
 
-	return amps;
+	return zaws;
 };
 
 module.exports = {
