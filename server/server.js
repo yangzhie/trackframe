@@ -2,6 +2,10 @@ const express = require("express");
 const { fetchWarframes } = require("./utils/fetch/fetchWarframes");
 const { fetchWeapons } = require("./utils/fetch/fetchWeapons");
 const { fetchResources } = require("./utils/fetch/fetchResources");
+const {
+	sortWarframes,
+	sortNecramechs,
+} = require("./utils/helper/sortWarframes");
 const app = express();
 const PORT = 8881;
 
@@ -10,8 +14,10 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/warframes", async (req, res) => {
-	const data = await fetchWarframes();
-	res.json(data);
+	const warframes = await fetchWarframes();
+	const sortedWarframes = sortWarframes(warframes);
+	const sortedNecramechs = sortNecramechs(warframes);
+	res.json(sortedNecramechs);
 });
 
 app.get("/weapons", async (req, res) => {
