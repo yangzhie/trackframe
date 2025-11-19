@@ -4,6 +4,7 @@ const { fetchWeapons } = require("./utils/fetch/fetchWeapons");
 const { fetchResources } = require("./utils/fetch/fetchResources");
 const {
 	sortWarframes,
+	sortArchwings,
 	sortNecramechs,
 } = require("./utils/helper/sortWarframes");
 const {
@@ -22,9 +23,10 @@ app.get("/test", (req, res) => {
 
 app.get("/warframes", async (req, res) => {
 	const rawWarframes = await fetchWarframes();
-	const warframes = sortWarframes(rawWarframes); // TODO: extract archwings + weapons
+	const warframes = sortWarframes(rawWarframes); // TODO: extract archwing  weapons
+	const archwings = sortArchwings(rawWarframes);
 	const necramechs = sortNecramechs(rawWarframes); // TODO: add to vehicles
-	res.json(necramechs);
+	res.json(archwings);
 });
 
 app.get("/weapons", async (req, res) => {

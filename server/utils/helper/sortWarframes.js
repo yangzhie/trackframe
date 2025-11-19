@@ -15,6 +15,15 @@ const sortWarframes = (warframes) => {
 	return sortedWarframes;
 };
 
+// Filter all Archwings
+const sortArchwings = (warframes) => {
+	const sortedArchwings = warframes.filter((warframe) => {
+		return warframe["category"] === "Archwing";
+	});
+
+	return sortedArchwings;
+};
+
 // Filter Necramechs from Warframes
 const sortNecramechs = (warframes) => {
 	const sortedNecramechs = warframes.filter((warframe) => {
@@ -26,5 +35,6 @@ const sortNecramechs = (warframes) => {
 
 module.exports = {
 	sortWarframes,
+	sortArchwings,
 	sortNecramechs,
 };
