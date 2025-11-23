@@ -19,33 +19,33 @@ const { sortResources } = require("./utils/helper/sortResources");
 const app = express();
 const PORT = 8881;
 
-app.get("/test", (req, res) => {
-	res.json({ hello: "ei" });
-});
-
 app.get("/warframes", async (req, res) => {
 	const rawWarframes = await fetchWarframes();
+
 	const warframes = sortWarframes(rawWarframes);
 	const archwings = sortArchwings(rawWarframes);
 	const necramechs = sortNecramechs(rawWarframes);
+
 	res.json(archwings);
 });
 
 app.get("/weapons", async (req, res) => {
 	const rawWeapons = await fetchWeapons();
+
 	const primaryWeapons = sortPrimaryWeapons(rawWeapons);
-	// TODO: add kitguns
 	const secondaryWeapons = sortSecondaryWeapons(rawWeapons);
-	// TODO: add zaws
 	const meleeWeapons = sortMeleeWeapons(rawWeapons);
 	const archGuns = sortArchGuns(rawWeapons);
 	const archMelees = sortArchMelee(rawWeapons);
+
 	res.json(archMelees);
 });
 
 app.get("/resources", async (req, res) => {
 	const rawResources = await fetchResources();
+
 	const resources = sortResources(rawResources);
+
 	res.json(resources);
 });
 

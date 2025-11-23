@@ -1,6 +1,3 @@
-// TODO: KITGUNS
-// TODO: ZAWS
-// TODO: PLEXUS
 const kDrivesArr = [
 	"Bad Baby",
 	"Feverspine",
@@ -52,11 +49,13 @@ const sortResources = (resourcesObj) => {
 	// Declare K-Drive and relevant Component arrays
 	const kDrives = [];
 	const kDriveComponents = [];
+	const kDriveObj = { kDrives, kDriveComponents };
 
 	// Declare Amp arrays
 	const amps = [];
 	const ampBraces = [];
 	const ampScaffolds = [];
+	const ampObj = { amps, ampBraces, ampScaffolds };
 
 	// Declare IG-variants array
 	const incarnonGenesis = [];
@@ -70,7 +69,31 @@ const sortResources = (resourcesObj) => {
 	const zawComponents = [];
 	const zawsObj = { zaws, zawComponents };
 
-	const temp = [];
+	// Declare Alloys array
+	const alloys = [];
+
+	// Declare Fish-related arrays
+	const actualFishes = [];
+	const fishParts = [];
+	const fishBaits = [];
+	const fishesObj = { actualFishes, fishParts, fishBaits };
+
+	// Declare Plants array
+	const plants = [];
+
+	// Declare Gems array
+	const gems = [];
+	const cutGems = [];
+	const gemsObj = { gems, cutGems };
+
+	// Declare Eidolon Shard array
+	const eidolonShards = [];
+
+	// Declare Relic array
+	const relics = [];
+
+	// Declare Misc array
+	const misc = [];
 
 	// Loop resources
 	for (let i = 0; i < resources.length; i++) {
@@ -152,9 +175,68 @@ const sortResources = (resourcesObj) => {
 				zawArr.push(resources[i]);
 			}
 		}
+
+		// Extract Alloys
+		if (type === "Alloy") {
+			alloys.push(resources[i]);
+		}
+
+		// Extract Fish + Fish data
+		if (type === "Fish" || type === "Fish Part" || type === "Fish Bait") {
+			if (type === "Fish") {
+				actualFishes.push(resources[i]);
+			} else if (type === "Fish Part") {
+				fishParts.push(resources[i]);
+			} else if (type === "Fish Bait") {
+				fishBaits.push(resources[i]);
+			}
+		}
+
+		// Extract Plant data
+		if (type === "Plant") {
+			plants.push(resources[i]);
+		}
+
+		// Extract Gem data
+		if (type === "Gem" || type === "Cut Gem") {
+			if (type === "Gem") {
+				gems.push(resources[i]);
+			} else if (type === "Cut Gem") {
+				cutGems.push(resources[i]);
+			}
+		}
+
+		// Extract Eidolon Shard data
+		if (type === "Eidolon Shard") {
+			eidolonShards.push(resources[i]);
+		}
+
+		// Extract Relic data
+		if (type === "Relic") {
+			relics.push(resources[i]);
+		}
+
+		// Extract Misc. data (work on more later)
+		if (type === "Misc") {
+			misc.push(resources[i]);
+		}
 	}
 
-	return zaws;
+	return {
+		companions: companions,
+		kDrives: kDriveObj,
+		amps: ampObj,
+		incarnonGenesis: incarnonGenesis,
+		kitguns: kitgunsObj,
+		zaws: zawsObj,
+		alloys: alloys,
+		fishes: fishesObj,
+		plants: plants,
+		gems: gemsObj,
+		eidolonShards: eidolonShards,
+		relics: relics,
+		misc: misc,
+	};
 };
 
 module.exports = {
