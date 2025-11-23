@@ -223,6 +223,7 @@ const sortResources = (resourcesObj) => {
 	}
 
 	return {
+		robotics: robotics,
 		companions: companions,
 		kDrives: kDriveObj,
 		amps: ampObj,
